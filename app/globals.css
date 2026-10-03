@@ -1,0 +1,342 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-marcellus: "Marcellus", Georgia, "Times New Roman", serif;
+    --font-josefin: "Josefin Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-jetbrains: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+    /* Art Deco ("The Gatsby Aesthetic") Core Tokens */
+    --deco-obsidian: #0a0a0a;
+    --deco-charcoal: #141414;
+    --deco-cream: #f2f0e4;
+    --deco-gold: #d4af37;
+    --deco-gold-light: #f2e8c4;
+    --deco-midnight: #1e3d59;
+    --deco-pewter: #888888;
+  }
+
+  * {
+    border-radius: 0px !important;
+  }
+
+  body {
+    font-family: var(--font-josefin);
+    background-color: var(--deco-obsidian);
+    color: var(--deco-cream);
+    /* Diagonal Crosshatch Background Pattern (45deg & -45deg gold lines at 4% opacity) + Top Sunburst Radial */
+    background-image: radial-gradient(
+        ellipse 80% 45% at 50% 0%,
+        rgba(212, 175, 55, 0.14) 0%,
+        rgba(30, 61, 89, 0.08) 45%,
+        transparent 75%
+      ),
+      repeating-linear-gradient(
+        45deg,
+        rgba(212, 175, 55, 0.038) 0px,
+        rgba(212, 175, 55, 0.038) 1px,
+        transparent 1px,
+        transparent 28px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(212, 175, 55, 0.038) 0px,
+        rgba(212, 175, 55, 0.038) 1px,
+        transparent 1px,
+        transparent 28px
+      );
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.02em;
+  }
+
+  /* All-Caps Display Typography with Generous Tracking */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-marcellus);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--deco-gold);
+    text-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+  }
+
+  h1 {
+    color: var(--deco-cream);
+    letter-spacing: 0.22em;
+    position: relative;
+  }
+
+  .font-mono {
+    font-family: var(--font-jetbrains);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ==========================================================================
+   ART DECO ARCHITECTURAL FRAMES, CARDS & STEPPED CORNERS
+   ========================================================================== */
+
+/* Transform all primary card surfaces into Art Deco Framed Exhibits */
+main div[class*="rounded-xl"][class*="border"] {
+  position: relative;
+  background-color: rgba(20, 20, 20, 0.94) !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.08),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.08);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 400ms ease, box-shadow 400ms ease;
+}
+
+main div[class*="rounded-xl"][class*="border"]:hover {
+  border-color: rgba(212, 175, 55, 0.85) !important;
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.2),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.22);
+}
+
+/* Decorative Corner L-Brackets on Cards (Top-Left & Bottom-Right) */
+main div[class*="rounded-xl"][class*="border"]::before,
+main div[class*="rounded-xl"][class*="border"]::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  transition: opacity 400ms ease, transform 400ms ease;
+  opacity: 0.65;
+  z-index: 2;
+}
+
+main div[class*="rounded-xl"][class*="border"]::before {
+  top: 5px;
+  left: 5px;
+  border-top: 2px solid var(--deco-gold);
+  border-left: 2px solid var(--deco-gold);
+}
+
+main div[class*="rounded-xl"][class*="border"]::after {
+  bottom: 5px;
+  right: 5px;
+  border-bottom: 2px solid var(--deco-gold);
+  border-right: 2px solid var(--deco-gold);
+}
+
+main div[class*="rounded-xl"][class*="border"]:hover::before,
+main div[class*="rounded-xl"][class*="border"]:hover::after {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   ROTATED DIAMOND CONTAINERS FOR CARD ICONS
+   ========================================================================== */
+main div[class*="rounded-xl"] > div > div[class*="rounded-lg"][class*="p-2.5"] {
+  transform: rotate(45deg);
+  border: 1px solid var(--deco-gold) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.2),
+    rgba(30, 61, 89, 0.35)
+  ) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+  transition: transform 400ms ease, box-shadow 400ms ease;
+}
+
+main
+  div[class*="rounded-xl"]
+  > div
+  > div[class*="rounded-lg"][class*="p-2.5"]
+  > svg {
+  transform: rotate(-45deg);
+  color: var(--deco-gold) !important;
+}
+
+main
+  div[class*="rounded-xl"]:hover
+  > div
+  > div[class*="rounded-lg"][class*="p-2.5"] {
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.5);
+}
+
+/* ==========================================================================
+   UNDERLINED ELEGANCE INPUTS
+   ========================================================================== */
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea,
+select {
+  background-color: transparent !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 2px solid var(--deco-gold) !important;
+  border-radius: 0px !important;
+  color: var(--deco-cream) !important;
+  font-family: var(--font-josefin);
+  transition: border-color 300ms ease, box-shadow 300ms ease,
+    background-color 300ms ease !important;
+}
+
+input[type="number"] {
+  font-family: var(--font-jetbrains);
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+  color: var(--deco-pewter) !important;
+  letter-spacing: 0.05em;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border-bottom-color: var(--deco-gold-light) !important;
+  background-color: rgba(212, 175, 55, 0.05) !important;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25) !important;
+  outline: none !important;
+}
+
+select option {
+  background-color: var(--deco-charcoal);
+  color: var(--deco-cream);
+}
+
+/* ==========================================================================
+   PRECISION INSTRUMENT BUTTONS
+   ========================================================================== */
+button,
+a[class*="inline-flex"][class*="rounded-lg"] {
+  font-family: var(--font-josefin);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  border-radius: 0px !important;
+  transition: all 300ms ease-out !important;
+}
+
+/* Solid Gold Primary Action Buttons */
+button[class*="bg-emerald-500"],
+a[class*="bg-emerald-500"] {
+  background: linear-gradient(
+    135deg,
+    #e5c453 0%,
+    #d4af37 50%,
+    #b59024 100%
+  ) !important;
+  color: #0a0a0a !important;
+  border: 1px solid #f2e8c4 !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.28) !important;
+  font-weight: 700 !important;
+}
+
+button[class*="bg-emerald-500"]:hover,
+a[class*="bg-emerald-500"]:hover {
+  background: #f2e8c4 !important;
+  color: #0a0a0a !important;
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.55) !important;
+  transform: translateY(-1px);
+}
+
+/* Midnight Blue & Gold Framed Secondary Action Buttons */
+button[class*="bg-blue-600"],
+a[class*="bg-blue-500"] {
+  background-color: var(--deco-midnight) !important;
+  color: var(--deco-gold-light) !important;
+  border: 1px solid var(--deco-gold) !important;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.18) !important;
+}
+
+button[class*="bg-blue-600"]:hover,
+a[class*="bg-blue-500"]:hover {
+  background-color: var(--deco-gold) !important;
+  color: var(--deco-obsidian) !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.45) !important;
+}
+
+/* Focus Accessibility Ring */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--deco-gold) !important;
+  outline-offset: 2px !important;
+}
+
+/* ==========================================================================
+   ART DECO DATA TABLES & DOUBLE BORDERS
+   ========================================================================== */
+table thead tr {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 20, 20, 0.98) 0%,
+    rgba(30, 61, 89, 0.25) 50%,
+    rgba(20, 20, 20, 0.98) 100%
+  ) !important;
+  border-top: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border-bottom: 3px double rgba(212, 175, 55, 0.65) !important;
+}
+
+table thead th {
+  font-family: var(--font-marcellus);
+  color: var(--deco-gold) !important;
+  letter-spacing: 0.18em !important;
+  font-size: 0.72rem !important;
+}
+
+table tbody tr {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.14) !important;
+  transition: background-color 250ms ease, box-shadow 250ms ease !important;
+}
+
+table tbody tr:hover {
+  background-color: rgba(212, 175, 55, 0.06) !important;
+  box-shadow: inset 3px 0 0 var(--deco-gold);
+}
+
+/* ==========================================================================
+   SIDEBAR & TOP HEADER ARCHITECTURAL ORNAMENTATION
+   ========================================================================== */
+aside {
+  background-color: #0d0d0d !important;
+  border-right: 3px double rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 6px 0 25px rgba(0, 0, 0, 0.8);
+}
+
+header {
+  background-color: rgba(14, 14, 14, 0.92) !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.08);
+}
+
+/* Modal Framed Exhibit */
+div[role="dialog"] > div {
+  background-color: #111111 !important;
+  border: 2px solid var(--deco-gold) !important;
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.3),
+    inset 0 0 0 4px #111111,
+    inset 0 0 0 5px rgba(212, 175, 55, 0.35) !important;
+}
+
+/* Custom Art Deco Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.45);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
